@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { BASE_HADITH_URL } from 'react-native-dotenv';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { BASE_HADITH_URL } from '@env';
 
 export default function App() {
    useEffect(() => {
@@ -18,16 +18,26 @@ export default function App() {
          const books = await response
             .json()
             .then((b) => b.filter((item) => item.book_key != ''));
-         console.log(books);
+
+         let randomBook = books[Math.floor(Math.random() * books.length)];
       } catch (error) {}
    };
 
-   return (
-      <View style={styles.container}>
-         <Text>This is hadith app with errors</Text>
-         <StatusBar style='auto' />
-      </View>
-   );
+   if (loader) {
+      return (
+         <View style={styles.container}>
+            <ActivityIndicator />
+            <StatusBar style='auto' />
+         </View>
+      );
+   } else {
+      return (
+         <View style={styles.container}>
+            <Text>Hooray</Text>
+            <StatusBar style='auto' />
+         </View>
+      );
+   }
 }
 
 const styles = StyleSheet.create({
