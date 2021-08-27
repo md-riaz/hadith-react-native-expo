@@ -26,8 +26,9 @@ export default function App() {
    if (loader) {
       return (
          <View style={styles.container}>
-            <ActivityIndicator />
             <StatusBar style='auto' />
+            <ActivityIndicator size='large' color='#28a745' />
+            <Text style={{ marginTop: 20, fontSize: 20 }}>আইতাছি...</Text>
          </View>
       );
    } else {
