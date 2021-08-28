@@ -1,15 +1,15 @@
-import {ActivityIndicator, StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import React from "react";
 
-export default function TryAgain() {
+
+export default function Hadith({ hadith, setCurrentComp }) {
     return (
         <View style={styles.container}>
+            <Text>{hadith.hadithBengali}</Text>
             <StatusBar style='auto'/>
-            <ActivityIndicator size='large' color='#28a745'/>
-            <Text style={[{marginTop: 20, fontSize: 20}, styles.text]}>সমস্যা হইসে...</Text>
         </View>
-    );
+    )
 }
 
 const styles = StyleSheet.create({

@@ -1,17 +1,19 @@
-import {StatusBar} from 'expo-status-bar';
-import {useFonts} from "expo-font";
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {useFonts} from 'expo-font';
 import {BASE_HADITH_URL} from '@env';
-import AppLoading from './components/AppLoading';
+import Loader from './components/Loader';
 import TryAgain from "./components/TryAgain";
+import AppLoading from "expo-app-loading";
+import Hadith from "./components/Hadith";
 
 export default function App() {
     const [loader, setLoader] = useState(true);
     const [error, setError] = useState(false);
+    const [currentComp, setCurrentComp] = useState('hadith');
     const [hadith, setHadith] = useState([]);
 
-    // loading custom font
+    // loading custom fonts
     let [fontsLoaded] = useFonts({
         'AdorshoLipi': require('./assets/fonts/AdorshoLipi_Normal.ttf'),
     });
@@ -22,7 +24,7 @@ export default function App() {
     const getHadiths = async function () {
 
         try {
-            setLoader(true);
+
             // get all available books
             const books = await fetch(BASE_HADITH_URL + '/hadith').then(resp => resp.json()).then((b) => b.filter((item) => item.book_key !== ''));
             const randomBook = getRandomOf(books);
@@ -32,7 +34,7 @@ export default function App() {
             const randomChapter = getRandomOf(chapters);
 
             // get all available hadith from the random chapter
-            const hadiths = fetch(BASE_HADITH_URL + `/hadith/${randomBook['book_key']}/${randomChapter['chSerial']}`).then(res => res.json());
+            const hadiths = await fetch(BASE_HADITH_URL + `/hadith/${randomBook['book_key']}/${randomChapter['chSerial']}`).then(res => res.json());
             const randomHadith = getRandomOf(hadiths);
 
             // the final hadith
@@ -59,21 +61,21 @@ export default function App() {
     }, []);
 
 
-    if (loader || !fontsLoaded) {
-
-        return <AppLoading/>
-
+    if (!fontsLoaded) {
+        return <AppLoading/>;
+    } else if (loader) {
+        return <Loader/>
     } else if (error) {
-
         return <TryAgain/>
-
     } else {
 
         return (
-            <View style={styles.container}>
-                <Text>Hooray</Text>
-                <StatusBar style='auto'/>
-            </View>
+            <>
+                {currentComp === 'hadith' && (
+                    <Hadith hadith={hadith} setCurrentComp={setCurrentComp}/>
+                )}
+            </>
+
         );
 
     }
