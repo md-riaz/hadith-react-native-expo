@@ -22,9 +22,8 @@ export default function App() {
 
 
     const getHadiths = async function () {
-
+        setLoader(true);
         try {
-
             // get all available books
             const books = await fetch(BASE_HADITH_URL + '/hadith').then(resp => resp.json()).then((b) => b.filter((item) => item.book_key !== ''));
             const randomBook = getRandomOf(books);
@@ -53,6 +52,7 @@ export default function App() {
 
         } catch (error) {
             setError(true);
+            alert(error)
         }
     };
 
@@ -63,16 +63,16 @@ export default function App() {
 
     if (!fontsLoaded) {
         return <AppLoading/>;
+    } else if (error) {
+        return <TryAgain getHadith={getHadiths}/>
     } else if (loader) {
         return <Loader/>
-    } else if (error) {
-        return <TryAgain/>
     } else {
 
         return (
             <>
                 {currentComp === 'hadith' && (
-                    <Hadith hadith={hadith} setCurrentComp={setCurrentComp}/>
+                    <Hadith hadith={hadith} getHadiths={getHadiths} setCurrentComp={setCurrentComp}/>
                 )}
             </>
 
