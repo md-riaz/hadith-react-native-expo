@@ -1,22 +1,35 @@
-import {RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text} from "react-native";
+import {RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
 import {StatusBar} from "expo-status-bar";
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {LinearGradient} from 'expo-linear-gradient'
+import Button from "./Button";
 
-export default function Hadith({hadith, getHadiths, setCurrentComp}) {
+
+export default function Hadith({hadith, RefreshHadith, historyClick}) {
     const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+
+        RefreshHadith().then(() => setRefreshing(false));
+    }, []);
+
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar style='light'/>
             <LinearGradient style={styles.LinearGradient} colors={['#00172d 0%', '#000b18 100%']}>
-                <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={()=> getHadiths()}/>}>
-                    <Text style={styles.headerText}>প্রতি মুহুর্তে হাদিস</Text>
+                <Text style={styles.headerText}>প্রতি মুহুর্তে হাদিস</Text>
+                <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
                     <Text style={styles.topicName}>{hadith.topicName && 'পরিচ্ছেদঃ ' + hadith.topicName}</Text>
                     <Text style={styles.arabic}>{hadith.hadithArabic}</Text>
                     <Text style={styles.bangla}>{hadith.hadithBengali}</Text>
                     <Text style={styles.english}>{hadith.hadithEnglish}</Text>
                     <Text style={styles.book}>{'বইঃ ' + hadith.book}</Text>
                     <Text style={styles.chapter}>{'অধ্যায়ঃ ' + hadith.chapter}</Text>
+                    <View style={{marginTop: 20, flexDirection: 'row', justifyContent: 'center'}}>
+                        <Button title='Show History' bgColor='#ffc107' color='#212529' onPress={historyClick}/>
+                    </View>
                 </ScrollView>
             </LinearGradient>
         </SafeAreaView>
@@ -27,7 +40,8 @@ const styles = StyleSheet.create({
         container: {
             flex: 1,
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            backgroundColor: '#000'
         },
         LinearGradient: {
             flex: 1,
@@ -38,7 +52,7 @@ const styles = StyleSheet.create({
             paddingTop: 50
         },
         headerText: {
-            fontFamily: 'AdorshoLipi',
+            fontFamily: 'Bangla',
             fontSize: 30,
             marginBottom: 25,
             paddingBottom: 3,
@@ -51,23 +65,23 @@ const styles = StyleSheet.create({
 
         },
         topicName: {
-            fontSize: 28,
+            fontSize: 30,
             color: 'darksalmon',
-            fontFamily: 'AdorshoLipi',
+            fontFamily: 'Bangla',
             marginBottom: 10,
             textAlign: 'center',
         },
         bangla: {
-            fontFamily: 'AdorshoLipi',
+            fontFamily: 'Bangla',
             color: '#fff',
-            fontSize: 20,
+            fontSize: 25,
             lineHeight: 35,
             marginVertical: 10,
             textAlign: 'justify'
 
         },
         english: {
-            fontSize: 18,
+            fontSize: 22,
             color: 'darkgray',
             marginBottom: 20
         },
@@ -79,15 +93,15 @@ const styles = StyleSheet.create({
         book: {
             color: '#28a745',
             textAlign: 'center',
-            fontSize: 20,
-            fontFamily: 'AdorshoLipi',
+            fontSize: 25,
+            fontFamily: 'Bangla',
             marginVertical: 3
         },
         chapter: {
             color: '#28a745',
             textAlign: 'center',
-            fontSize: 20,
-            fontFamily: 'AdorshoLipi',
+            fontSize: 25,
+            fontFamily: 'Bangla',
             marginVertical: 3
         }
     })

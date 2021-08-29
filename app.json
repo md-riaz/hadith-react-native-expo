@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "Hadith",
-    "slug": "Hadith",
+    "name": "MomentHadith",
+    "slug": "MomentHadith",
     "version": "1.0.0",
+    "scheme": "hadith",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -23,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.mdriaz.Hadith"
     },
     "web": {
       "favicon": "./assets/favicon.png"

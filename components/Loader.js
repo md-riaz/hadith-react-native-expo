@@ -8,7 +8,7 @@ export default function Loader() {
         <View style={styles.container}>
             <StatusBar style='auto'/>
             <ActivityIndicator size='large' color='#28a745'/>
-            <Text style={[{marginTop: 20, fontSize: 20}, styles.text]}>আইতাছি...</Text>
+            <Text style={[{marginTop: 20, fontSize: 30}, styles.text]}>আইতাছি...</Text>
         </View>
     );
 }
@@ -21,6 +21,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     text: {
-        fontFamily: 'AdorshoLipi'
+        fontFamily: 'Bangla'
     }
 });

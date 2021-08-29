@@ -1,14 +1,26 @@
-import { StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {RefreshControl, ScrollView, StyleSheet, Text, View} from "react-native";
 import {StatusBar} from "expo-status-bar";
-import React from "react";
+import React, {useCallback, useState} from "react";
 import Button from './Button'
 
-export default function TryAgain({getHadith}) {
+export default function TryAgain({RefreshHadith}) {
+    const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+
+        RefreshHadith().then(() => setRefreshing(false));
+    }, []);
+
     return (
         <View style={styles.container}>
-            <StatusBar style='auto'/>
-            <Text style={[styles.text]}>সমস্যার জন্য দুঃখিত। আবার চেষ্টা করুন</Text>
-            <Button title='Try Now' bgColor='#28a745' color='#fff' onPress={getHadith}/>
+            <ScrollView contentContainerStyle={styles.container}
+                        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
+                <StatusBar style='auto'/>
+                <Text style={[styles.text]}>সমস্যার জন্য দুঃখিত। আবার চেষ্টা করুন</Text>
+                <Button title='Try Now' bgColor='#28a745' color='#fff' onPress={onRefresh}/>
+            </ScrollView>
+
         </View>
     );
 }
@@ -21,8 +33,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     text: {
-        fontFamily: 'AdorshoLipi',
-        fontSize: 20,
+        fontFamily: 'Bangla',
+        fontSize: 30,
         marginBottom: 20
     }
 });

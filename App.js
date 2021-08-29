@@ -6,6 +6,7 @@ import Loader from './components/Loader';
 import TryAgain from "./components/TryAgain";
 import AppLoading from "expo-app-loading";
 import Hadith from "./components/Hadith";
+import Histories from "./components/Histories";
 
 export default function App() {
     const [loader, setLoader] = useState(true);
@@ -15,7 +16,7 @@ export default function App() {
 
     // loading custom fonts
     let [fontsLoaded] = useFonts({
-        'AdorshoLipi': require('./assets/fonts/AdorshoLipi_Normal.ttf'),
+        'Bangla': require('./assets/fonts/Bangla.ttf'),
     });
 
     const getRandomOf = (item) => item[Math.floor(Math.random() * item.length)];
@@ -46,25 +47,36 @@ export default function App() {
                 hadithBengali: randomHadith['hadithBengali']
             };
 
-            // set hadith info to state and stop the loader
-            setHadith(hadith);
-            setLoader(false);
-
+            return hadith;
         } catch (error) {
             setError(true);
             alert(error)
+        } finally {
+            setLoader(false);
         }
     };
 
-    useEffect(() => {
-        getHadiths();
+    // on refresh
+    const RefreshHadith = async function () {
+        getHadiths().then(data => setHadith(data) && setCurrentComp('hadith'));
+    }
+
+    // on history btn click
+    const historyClick = function () {
+        setCurrentComp('histories');
+    }
+
+
+
+    useEffect ( ()=> {
+        getHadiths().then(data => setHadith(data));
     }, []);
 
 
     if (!fontsLoaded) {
         return <AppLoading/>;
     } else if (error) {
-        return <TryAgain getHadith={getHadiths}/>
+        return <TryAgain RefreshHadith={RefreshHadith}/>
     } else if (loader) {
         return <Loader/>
     } else {
@@ -72,7 +84,7 @@ export default function App() {
         return (
             <>
                 {currentComp === 'hadith' && (
-                    <Hadith hadith={hadith} getHadiths={getHadiths} setCurrentComp={setCurrentComp}/>
+                    <Hadith hadith={hadith} RefreshHadith={RefreshHadith} historyClick={historyClick}/>
                 )}
             </>
 
@@ -87,7 +99,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        fontFamily: 'AdorshoLipi'
+        fontFamily: 'Bangla'
     },
 
 });
