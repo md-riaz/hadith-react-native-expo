@@ -5,7 +5,7 @@ import {LinearGradient} from 'expo-linear-gradient'
 import Button from "./Button";
 
 
-export default function Hadith({hadith, RefreshHadith, historyClick}) {
+export default function Hadith({hadith, RefreshHadith, onPress}) {
     const [refreshing, setRefreshing] = useState(false);
 
     const onRefresh = useCallback(() => {
@@ -28,7 +28,7 @@ export default function Hadith({hadith, RefreshHadith, historyClick}) {
                     <Text style={styles.book}>{'বইঃ ' + hadith.book}</Text>
                     <Text style={styles.chapter}>{'অধ্যায়ঃ ' + hadith.chapter}</Text>
                     <View style={{marginVertical: 20, flexDirection: 'row', justifyContent: 'center'}}>
-                        <Button title='Show History' bgColor='#ffc107' color='#212529' onPress={historyClick}/>
+                        <Button title='Show History' bgColor='#ffc107' color='#212529' onPress={() => onPress()}/>
                     </View>
                 </ScrollView>
             </LinearGradient>

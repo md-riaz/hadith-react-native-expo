@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {useFonts} from 'expo-font';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {BASE_HADITH_URL} from '@env';
 import Loader from './components/Loader';
 import TryAgain from "./components/TryAgain";
@@ -9,7 +10,6 @@ import Hadith from "./components/Hadith";
 import Histories from "./components/Histories";
 
 export default function App() {
-    const [loader, setLoader] = useState(true);
     const [error, setError] = useState(false);
     const [view, setView] = useState('hadith');
     const [hadith, setHadith] = useState([]);
@@ -21,9 +21,8 @@ export default function App() {
 
     const getRandomOf = (item) => item[Math.floor(Math.random() * item.length)];
 
-
     const getHadiths = async function () {
-        setLoader(true);
+        setView('loader');
         try {
             // get all available books
             const books = await fetch(BASE_HADITH_URL + '/hadith').then(resp => resp.json()).then((b) => b.filter((item) => item.book_key !== ''));
@@ -47,12 +46,15 @@ export default function App() {
                 hadithBengali: randomHadith['hadithBengali']
             };
 
+            // save history
+            saveHistory(randomHadith['topicName'], randomBook['book_key'], randomChapter['chSerial'], randomHadith['hadithNo'])
+
             return selectedHadith;
         } catch (error) {
             setError(true);
             alert(error)
         } finally {
-            setLoader(false);
+            setView('hadith');
         }
     };
 
@@ -63,8 +65,69 @@ export default function App() {
     }
 
     // on history btn click
-    const historyClick = function () {
+    const handleHistoryBtn = function () {
         setView('history');
+    }
+
+    // on show hadith btn click
+    const handleHadithBtn = function () {
+        setView('hadith');
+    }
+
+    // save current hadith to localStorage
+    const saveHistory = (topic, book_key, chapterID, hadithNo) => {
+        let localHistories = getHistories() ?? {};
+
+        localHistories[Date.now()] = {
+            topic: topic,
+            hadithNo: hadithNo,
+            uri: BASE_HADITH_URL + `/hadith/${book_key}/${chapterID}`
+        };
+
+        storeHistories(localHistories);
+    };
+
+    // get single hadith from parameters
+    const getThisHadith = async (hadithNo, uri) => {
+        setView('loader');
+        try {
+            const hadith = await fetch(uri).then(res => res.json()).then(hadiths => hadiths.find(h => h.hadithNo === hadithNo));
+            return {
+                topicName: hadith['topicName'],
+                book: hadith['nameBengali'],
+                chapter: hadith['nameBengali'],
+                hadithArabic: hadith['hadithArabic'],
+                hadithEnglish: hadith['hadithEnglish'],
+                hadithBengali: hadith['hadithBengali']
+            };
+
+        } catch (error) {
+            setError(true);
+            alert(error)
+        } finally {
+            setView('hadith');
+        }
+    }
+
+    // set history
+    const storeHistories = async (value) => {
+        try {
+            const jsonValue = JSON.stringify(value)
+            await AsyncStorage.setItem('@histories', jsonValue)
+        } catch (e) {
+            setError(true);
+            alert(e);
+        }
+    }
+
+    const getHistories = async () => {
+        try {
+            const jsonValue = await AsyncStorage.getItem('@histories')
+            return jsonValue != null ? JSON.parse(jsonValue) : null;
+        } catch (e) {
+            setError(true);
+            alert(e);
+        }
     }
 
 
@@ -77,12 +140,12 @@ export default function App() {
         return <AppLoading/>;
     } else if (error) {
         return <TryAgain tryAgain={RefreshHadith}/>
-    } else if (loader) {
+    } else if (view === 'loader') {
         return <Loader/>
-    } else if(view === 'history'){
-        return <Histories/>
+    } else if (view === 'history') {
+        return <Histories onPress={handleHadithBtn} getHistories={getHistories}/>
     } else {
-        return <Hadith hadith={hadith} RefreshHadith={RefreshHadith} historyClick={historyClick}/>
+        return <Hadith hadith={hadith} RefreshHadith={RefreshHadith} onPress={handleHistoryBtn}/>
     }
 }
 

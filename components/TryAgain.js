@@ -14,13 +14,11 @@ export default function TryAgain({tryAgain}) {
 
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyle={styles.container}
-                        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
+            <ScrollView contentContainerStyle={styles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
                 <StatusBar style='auto'/>
                 <Text style={[styles.text]}>সমস্যার জন্য দুঃখিত। আবার চেষ্টা করুন</Text>
-                <Button title='Try Now' bgColor='#28a745' color='#fff' onPress={onRefresh}/>
+                <Button title='Try Now' bgColor='#28a745' color='#fff' onPress={()=>onRefresh()}/>
             </ScrollView>
-
         </View>
     );
 }
