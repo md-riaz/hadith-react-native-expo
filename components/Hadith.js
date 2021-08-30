@@ -27,7 +27,7 @@ export default function Hadith({hadith, RefreshHadith, historyClick}) {
                     <Text style={styles.english}>{hadith.hadithEnglish}</Text>
                     <Text style={styles.book}>{'বইঃ ' + hadith.book}</Text>
                     <Text style={styles.chapter}>{'অধ্যায়ঃ ' + hadith.chapter}</Text>
-                    <View style={{marginTop: 20, flexDirection: 'row', justifyContent: 'center'}}>
+                    <View style={{marginVertical: 20, flexDirection: 'row', justifyContent: 'center'}}>
                         <Button title='Show History' bgColor='#ffc107' color='#212529' onPress={historyClick}/>
                     </View>
                 </ScrollView>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#000'
+            backgroundColor: '#00172d'
         },
         LinearGradient: {
             flex: 1,

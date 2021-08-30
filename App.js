@@ -11,7 +11,7 @@ import Histories from "./components/Histories";
 export default function App() {
     const [loader, setLoader] = useState(true);
     const [error, setError] = useState(false);
-    const [currentComp, setCurrentComp] = useState('hadith');
+    const [view, setView] = useState('hadith');
     const [hadith, setHadith] = useState([]);
 
     // loading custom fonts
@@ -38,7 +38,7 @@ export default function App() {
             const randomHadith = getRandomOf(hadiths);
 
             // the final hadith
-            const hadith = {
+            const selectedHadith = {
                 topicName: randomHadith['topicName'],
                 book: randomBook['nameBengali'],
                 chapter: randomChapter['nameBengali'],
@@ -47,7 +47,7 @@ export default function App() {
                 hadithBengali: randomHadith['hadithBengali']
             };
 
-            return hadith;
+            return selectedHadith;
         } catch (error) {
             setError(true);
             alert(error)
@@ -58,17 +58,17 @@ export default function App() {
 
     // on refresh
     const RefreshHadith = async function () {
-        getHadiths().then(data => setHadith(data) && setCurrentComp('hadith'));
+        setError(false);
+        getHadiths().then(data => setHadith(data) && setView('hadith'));
     }
 
     // on history btn click
     const historyClick = function () {
-        setCurrentComp('histories');
+        setView('history');
     }
 
 
-
-    useEffect ( ()=> {
+    useEffect(() => {
         getHadiths().then(data => setHadith(data));
     }, []);
 
@@ -76,20 +76,13 @@ export default function App() {
     if (!fontsLoaded) {
         return <AppLoading/>;
     } else if (error) {
-        return <TryAgain RefreshHadith={RefreshHadith}/>
+        return <TryAgain tryAgain={RefreshHadith}/>
     } else if (loader) {
         return <Loader/>
+    } else if(view === 'history'){
+        return <Histories/>
     } else {
-
-        return (
-            <>
-                {currentComp === 'hadith' && (
-                    <Hadith hadith={hadith} RefreshHadith={RefreshHadith} historyClick={historyClick}/>
-                )}
-            </>
-
-        );
-
+        return <Hadith hadith={hadith} RefreshHadith={RefreshHadith} historyClick={historyClick}/>
     }
 }
 

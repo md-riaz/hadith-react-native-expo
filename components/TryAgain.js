@@ -3,13 +3,13 @@ import {StatusBar} from "expo-status-bar";
 import React, {useCallback, useState} from "react";
 import Button from './Button'
 
-export default function TryAgain({RefreshHadith}) {
+export default function TryAgain({tryAgain}) {
     const [refreshing, setRefreshing] = useState(false);
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
 
-        RefreshHadith().then(() => setRefreshing(false));
+        tryAgain().then(() => setRefreshing(false));
     }, []);
 
     return (
