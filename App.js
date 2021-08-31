@@ -11,7 +11,7 @@ import Histories from "./components/Histories";
 
 export default function App() {
     const [error, setError] = useState(false);
-    const [view, setView] = useState('hadith');
+    const [view, setView] = useState('');
     const [hadith, setHadith] = useState([]);
 
     // loading custom fonts
@@ -24,6 +24,7 @@ export default function App() {
     const getHadiths = async function () {
         setView('loader');
         try {
+
             // get all available books
             const books = await fetch(BASE_HADITH_URL + '/hadith').then(resp => resp.json()).then((b) => b.filter((item) => item.book_key !== ''));
             const randomBook = getRandomOf(books);
@@ -61,11 +62,12 @@ export default function App() {
     // on refresh
     const RefreshHadith = async function () {
         setError(false);
+        console.log('refresh')
         getHadiths().then(data => setHadith(data) && setView('hadith'));
     }
 
     // on history btn click
-    const handleHistoryBtn = function () {
+    const showHistory = function () {
         setView('history');
     }
 
@@ -123,7 +125,7 @@ export default function App() {
     const getHistories = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem('@histories')
-            return jsonValue != null ? JSON.parse(jsonValue) : null;
+            return jsonValue != null ? JSON.parse(jsonValue) : {};
         } catch (e) {
             setError(true);
             alert(e);
@@ -133,19 +135,21 @@ export default function App() {
 
     useEffect(() => {
         getHadiths().then(data => setHadith(data));
+        return () => setView('hadith') && console.log('Cleanup useEffect');
+
     }, []);
 
 
     if (!fontsLoaded) {
         return <AppLoading/>;
     } else if (error) {
-        return <TryAgain tryAgain={RefreshHadith}/>
+        return <TryAgain RefreshHadith={RefreshHadith}/>
     } else if (view === 'loader') {
         return <Loader/>
     } else if (view === 'history') {
-        return <Histories onPress={handleHadithBtn} getHistories={getHistories}/>
+        return <Histories handleHadithBtn={handleHadithBtn} getHistories={getHistories} getThisHadith={getThisHadith}/>
     } else {
-        return <Hadith hadith={hadith} RefreshHadith={RefreshHadith} onPress={handleHistoryBtn}/>
+        return <Hadith hadith={hadith} RefreshHadith={RefreshHadith} showHistory={showHistory}/>
     }
 }
 
