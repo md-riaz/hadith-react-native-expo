@@ -20,7 +20,7 @@ export default function Hadith({hadith, RefreshHadith, showHistory}) {
             <StatusBar style='light'/>
             <LinearGradient style={styles.LinearGradient} colors={['#00172d 0%', '#000b18 100%']}>
                 <Text style={styles.headerText}>প্রতি মুহুর্তে হাদিস</Text>
-                <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
+                <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>} contentContainerStyle={{maxWidth: 1100}}>
                     <Text style={styles.topicName}>{hadith.topicName && 'পরিচ্ছেদঃ ' + hadith.topicName}</Text>
                     <Text style={styles.arabic}>{hadith.hadithArabic}</Text>
                     <Text style={styles.bangla}>{hadith.hadithBengali}</Text>
