@@ -19,19 +19,24 @@ export default function Histories({handleHadithBtn, getHistories, getThisHadith}
             alert(e);
         }
 
-        console.log('Done.')
+        console.log('Delete Done.')
     }
 
     useEffect(() => {
+        let isMounted = true;
         getHistories().then((data) => {
             data = Object.keys(data).reduce((obj, k) => {
                 if (data[k] != null && typeof data[k] === 'object') obj[k] = data[k];
                 return obj;
             }, {});
-            setHistories(data);
-            setLoading(false);
+            if (isMounted) {
+                setHistories(data);
+                setLoading(false);
+            }
         });
-
+        return () => {
+            isMounted = false
+        };
     }, []);
 
     if (loading) {
@@ -43,25 +48,18 @@ export default function Histories({handleHadithBtn, getHistories, getThisHadith}
                 <StatusBar style='light'/>
                 <LinearGradient style={styles.LinearGradient} colors={['#00172d 0%', '#000b18 100%']}>
                     <ScrollView contentContainerStyle={styles.ScrollView}>
-                        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                        <View style={{flex: 1,  justifyContent: 'center'}}>
                             {Object.keys(histories).length ? (
                                 Object.keys(histories).map((key, index) => {
                                     let history = histories[key];
                                     return (
-                                        <View style={{
-                                            flex: 1,
-                                            textAlign: 'left',
-                                            justifyContent: 'center',
-                                            marginBottom: 10
-                                        }}
-                                              key={index}>
-                                            <Text style={styles.text}  onPress={() => getThisHadith(history.hadithNo, history.uri)}>{history?.topic ?? history.hadithNo}</Text>
-                                        </View>
+                                        <Text key={index} style={styles.text}
+                                              onPress={() => getThisHadith(history.hadithNo, history.uri, history.book_key, history.chapterID)}>{history.topic !== '' ? history.topic : history.hadithNo}</Text>
                                     )
                                 })
                             ) : (
                                 <View style={{flex: 1, justifyContent: 'center'}}>
-                                        <Text style={styles.noHistory}>হিস্টোরি নাই বাপু</Text>
+                                    <Text style={styles.noHistory}>হিস্টোরি নাই বাপু</Text>
                                 </View>
                             )
 
@@ -71,7 +69,8 @@ export default function Histories({handleHadithBtn, getHistories, getThisHadith}
                 </LinearGradient>
                 <View style={{marginVertical: 20, flexDirection: 'row', justifyContent: 'center'}}>
                     <Button title='Show Hadith' bgColor='#28a745' color='#fff' onPress={() => handleHadithBtn()}/>
-                    <Button title='Delete History' bgColor='#dc3545' color='#fff' onPress={() => deleteHistory()} style={{marginLeft: 20}}/>
+                    <Button title='Delete History' bgColor='#dc3545' color='#fff' onPress={() => deleteHistory()}
+                            style={{marginLeft: 20}}/>
                 </View>
             </SafeAreaView>
         );
@@ -114,5 +113,6 @@ const styles = StyleSheet.create({
         color: '#fff',
         borderBottomWidth: 1,
         borderBottomColor: '#4b4b4b',
+        textAlign: 'left'
     }
 });

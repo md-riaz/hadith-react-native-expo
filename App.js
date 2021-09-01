@@ -48,7 +48,7 @@ export default function App() {
             };
 
             // save history
-            saveHistory(randomHadith['topicName'], randomBook['book_key'], randomChapter['chSerial'], randomHadith['hadithNo'])
+            await saveHistory(randomHadith['topicName'], randomBook['book_key'], randomChapter['chSerial'], randomHadith['hadithNo']);
 
             return selectedHadith;
         } catch (error) {
@@ -61,9 +61,17 @@ export default function App() {
 
     // on refresh
     const RefreshHadith = async function () {
+        setView('hadith');
         setError(false);
-        console.log('refresh')
-        getHadiths().then(data => setHadith(data) && setView('hadith'));
+        try {
+            let data = await getHadiths();
+            setHadith(data);
+        } catch (e) {
+            setError(true);
+            alert(e)
+        }
+
+        console.log('refresh done')
     }
 
     // on history btn click
@@ -77,16 +85,17 @@ export default function App() {
     }
 
     // save current hadith to localStorage
-    const saveHistory = (topic, book_key, chapterID, hadithNo) => {
-        let localHistories = getHistories() ?? {};
-
+    const saveHistory = async (topic, book_key, chapterID, hadithNo) => {
+        let localHistories = await getHistories() ?? {};
         localHistories[Date.now()] = {
             topic: topic,
             hadithNo: hadithNo,
+            book_key,
+            chapterID,
             uri: BASE_HADITH_URL + `/hadith/${book_key}/${chapterID}`
         };
 
-        storeHistories(localHistories);
+        await storeHistories(localHistories);
     };
 
     // get single hadith from parameters
@@ -94,7 +103,7 @@ export default function App() {
         setView('loader');
         try {
             const hadith = await fetch(uri).then(res => res.json()).then(hadiths => hadiths.find(h => h.hadithNo === hadithNo));
-            return {
+            const data = {
                 topicName: hadith['topicName'],
                 book: hadith['nameBengali'],
                 chapter: hadith['nameBengali'],
@@ -102,12 +111,13 @@ export default function App() {
                 hadithEnglish: hadith['hadithEnglish'],
                 hadithBengali: hadith['hadithBengali']
             };
-
+            setHadith(data);
         } catch (error) {
             setError(true);
             alert(error)
         } finally {
             setView('hadith');
+            console.log()
         }
     }
 
@@ -124,7 +134,7 @@ export default function App() {
 
     const getHistories = async () => {
         try {
-            const jsonValue = await AsyncStorage.getItem('@histories')
+            const jsonValue = await AsyncStorage.getItem('@histories');
             return jsonValue != null ? JSON.parse(jsonValue) : {};
         } catch (e) {
             setError(true);
@@ -134,9 +144,13 @@ export default function App() {
 
 
     useEffect(() => {
-        getHadiths().then(data => setHadith(data));
-        return () => setView('hadith') && console.log('Cleanup useEffect');
-
+        let isMounted = true;
+        getHadiths().then(data => {
+            if (isMounted) setHadith(data);
+        });
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
 

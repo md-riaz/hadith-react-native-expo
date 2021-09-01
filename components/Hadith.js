@@ -11,7 +11,11 @@ export default function Hadith({hadith, RefreshHadith, showHistory}) {
     const onRefresh = useCallback(() => {
         setRefreshing(true);
 
-        RefreshHadith().then(() => setRefreshing(false));
+        RefreshHadith();
+
+        return () => {
+            setRefreshing(false);
+        };
     }, []);
 
 
