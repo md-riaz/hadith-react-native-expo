@@ -32,9 +32,7 @@ export default function App() {
       const randomBook = getRandomOf(books);
 
       // get all chapter number from the selected random book
-      const chapters = await fetch(
-        BASE_HADITH_URL + `/hadith/${randomBook['book_key']}`
-      ).then((resp) => resp.json());
+      const chapters = await fetch(BASE_HADITH_URL + `/hadith/${randomBook['book_key']}`).then((resp) => resp.json());
       const randomChapter = getRandomOf(chapters);
 
       // get all available hadith from the random chapter
@@ -102,8 +100,7 @@ export default function App() {
         topic: topic,
         hadithNo: hadithNo,
         book_key,
-        chapterID,
-        uri: BASE_HADITH_URL + `/hadith/${book_key}/${chapterID}`,
+        chapterID
       };
 
       await storeHistories(localHistories);
@@ -112,21 +109,29 @@ export default function App() {
   );
 
   // get single hadith from parameters
-  const getThisHadith = async (hadithNo, uri) => {
+  const getThisHadith = async (book_key, chapterID, hadithNo) => {
     setView('loader');
     try {
-      const hadith = await fetch(uri)
-        .then((res) => res.json())
-        .then((hadiths) => hadiths.find((h) => h.hadithNo === hadithNo));
+      // get book name
+      const book = await fetch(BASE_HADITH_URL + `/hadith/`).then((resp) => resp.json()).then((b) => b.find((item) => item.book_key === book_key));
+
+      // get chapter name
+      const chapter = await fetch(BASE_HADITH_URL + `/hadith/${book_key}`).then((resp) => resp.json()).then((c) => c.find((item) => item.chSerial === chapterID));
+
+      // get the hadith
+      const hadith = await fetch(BASE_HADITH_URL + `/hadith/${book_key}/${chapterID}/`).then((res) => res.json()).then((hadiths) => hadiths.find((h) => h.hadithNo === hadithNo));
+
       const data = {
         topicName: hadith['topicName'],
-        book: hadith['nameBengali'],
-        chapter: hadith['nameBengali'],
+        book: book['nameBengali'],
+        chapter: chapter['nameBengali'],
         hadithArabic: hadith['hadithArabic'],
         hadithEnglish: hadith['hadithEnglish'],
         hadithBengali: hadith['hadithBengali'],
       };
+
       setHadith(data);
+      
     } catch (error) {
       setError(true);
       alert(error);
@@ -172,7 +177,7 @@ export default function App() {
 
   if (!fontsLoaded) {
     return <AppLoading />;
-  } else if (error) {
+  } else if (error || typeof hadith !== 'object') {
     return <TryAgain RefreshHadith={RefreshHadith} />;
   } else if (view === 'loader') {
     return <Loader />;
@@ -184,13 +189,13 @@ export default function App() {
         getThisHadith={getThisHadith}
       />
     );
-  } else {
-    return (
-      <Hadith
-        hadith={hadith}
-        RefreshHadith={RefreshHadith}
-        showHistory={showHistory}
-      />
-    );
   }
+
+  return (
+    <Hadith
+      hadith={hadith}
+      RefreshHadith={RefreshHadith}
+      showHistory={showHistory}
+    />
+  );
 }

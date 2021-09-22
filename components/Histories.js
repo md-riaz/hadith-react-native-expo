@@ -62,10 +62,9 @@ export default function Histories({
                     style={styles.text}
                     onPress={() =>
                       getThisHadith(
-                        history.hadithNo,
-                        history.uri,
                         history.book_key,
-                        history.chapterID
+                        history.chapterID,
+                        history.hadithNo
                       )
                     }>
                     {history.topic !== '' ? history.topic : history.hadithNo}

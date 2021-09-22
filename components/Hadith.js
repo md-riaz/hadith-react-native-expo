@@ -29,7 +29,7 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
     };
   }, [RefreshHadith]);
 
-  const notifyMessage = (msg: string) => {
+  const notifyMessage = (msg) => {
     if (Platform.OS === 'android') {
       ToastAndroid.show(msg, ToastAndroid.SHORT);
     } else if (Platform.OS === 'ios') {
