@@ -15,6 +15,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import React, { useCallback, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import parse from 'html-react-parser';
 import Button from './Button';
 
 const BASE_WEB_URL = 'https://hadith.ml';
@@ -53,8 +54,8 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
     try {
       const result = await Share.share({
         message:
-            BASE_WEB_URL +
-            `/?book_key=${hadith.bookId}&chapterID=${hadith.chapterId}&hadithNo=${hadith.hadithNo}`,
+          BASE_WEB_URL +
+          `/?book_key=${hadith.bookId}&chapterID=${hadith.chapterId}&hadithNo=${hadith.hadithNo}`,
       });
 
       if (result.action === Share.dismissedAction) {
@@ -66,77 +67,77 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
   };
 
   return (
-      <SafeAreaView style={styles.container}>
-        <StatusBar style="light" />
-        <LinearGradient
-            style={styles.LinearGradient}
-            colors={['#00172d 0%', '#000b18 100%']}>
-          <Text style={styles.headerText}>প্রতি মুহুর্তে হাদিস</Text>
-          <ScrollView
-              refreshControl={
-                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-              }
-              contentContainerStyle={{ maxWidth: 1100 }}>
-            <TouchableWithoutFeedback
-                onLongPress={() =>
-                    _handleLongPress('পরিচ্ছেদঃ ' + hadith.topicName)
-                }>
-              <Text style={styles.topicName}>
-                {hadith.topicName && 'পরিচ্ছেদঃ ' + hadith.topicName}
-              </Text>
-            </TouchableWithoutFeedback>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style="light" />
+      <LinearGradient
+        style={styles.LinearGradient}
+        colors={['#00172d 0%', '#000b18 100%']}>
+        <Text style={styles.headerText}>প্রতি মুহুর্তে হাদিস</Text>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+          contentContainerStyle={{ maxWidth: 1100 }}>
+          <TouchableWithoutFeedback
+            onLongPress={() =>
+              _handleLongPress('পরিচ্ছেদঃ ' + parse(hadith.topicName))
+            }>
+            <Text style={styles.topicName}>
+              {hadith.topicName && 'পরিচ্ছেদঃ ' + parse(hadith.topicName)}
+            </Text>
+          </TouchableWithoutFeedback>
 
-            <TouchableWithoutFeedback
-                onLongPress={() => _handleLongPress(hadith.hadithArabic)}>
-              <Text style={styles.arabic}>{hadith.hadithArabic}</Text>
-            </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onLongPress={() => _handleLongPress(hadith.hadithArabic)}>
+            <Text style={styles.arabic}>{hadith.hadithArabic}</Text>
+          </TouchableWithoutFeedback>
 
-            <TouchableWithoutFeedback
-                onLongPress={() => _handleLongPress(hadith.hadithBengali)}>
-              <Text style={styles.bangla}>{hadith.hadithBengali}</Text>
-            </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onLongPress={() => _handleLongPress(parse(hadith.hadithBengali))}>
+            <Text style={styles.bangla}>{parse(hadith.hadithBengali)}</Text>
+          </TouchableWithoutFeedback>
 
-            <TouchableWithoutFeedback
-                onLongPress={() => _handleLongPress(hadith.hadithEnglish)}>
-              <Text style={styles.english}>{hadith.hadithEnglish}</Text>
-            </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onLongPress={() => _handleLongPress(hadith.hadithEnglish)}>
+            <Text style={styles.english}>{hadith.hadithEnglish}</Text>
+          </TouchableWithoutFeedback>
 
-            <TouchableWithoutFeedback
-                onLongPress={() => _handleLongPress('বইঃ ' + hadith.book)}>
-              <Text style={styles.book}>{'বইঃ ' + hadith.book}</Text>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback
-                onLongPress={() => _handleLongPress('অধ্যায়ঃ ' + hadith.chapter)}>
-              <Text style={styles.chapter}>{'অধ্যায়ঃ ' + hadith.chapter}</Text>
-            </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onLongPress={() => _handleLongPress('বইঃ ' + hadith.book)}>
+            <Text style={styles.book}>{'বইঃ ' + hadith.book}</Text>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onLongPress={() => _handleLongPress('অধ্যায়ঃ ' + hadith.chapter)}>
+            <Text style={styles.chapter}>{'অধ্যায়ঃ ' + hadith.chapter}</Text>
+          </TouchableWithoutFeedback>
 
-            <View
-                style={{
-                  marginVertical: 20,
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                }}>
+          <View
+            style={{
+              marginVertical: 20,
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}>
+            <Button
+              title="Show History"
+              bgColor="#ffc107"
+              color="#212529"
+              onPress={() => showHistory()}
+            />
+            {Platform.OS !== 'web' ? (
               <Button
-                  title="Show History"
-                  bgColor="#ffc107"
-                  color="#212529"
-                  onPress={() => showHistory()}
+                title="Share"
+                bgColor="#0058a0"
+                color="#fff"
+                style={{ marginLeft: 20 }}
+                onPress={() => onShare()}
               />
-              {Platform.OS !== 'web' ? (
-                  <Button
-                      title="Share"
-                      bgColor="#0058a0"
-                      color="#fff"
-                      style={{ marginLeft: 20 }}
-                      onPress={() => onShare()}
-                  />
-              ) : (
-                  ''
-              )}
-            </View>
-          </ScrollView>
-        </LinearGradient>
-      </SafeAreaView>
+            ) : (
+              ''
+            )}
+          </View>
+        </ScrollView>
+      </LinearGradient>
+    </SafeAreaView>
   );
 }
 

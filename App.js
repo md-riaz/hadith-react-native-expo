@@ -85,6 +85,7 @@ export default function App() {
 
   // on refresh
   const RefreshHadith = async function () {
+    setView('loader');
     try {
       let data = await getHadiths();
       if (data) {

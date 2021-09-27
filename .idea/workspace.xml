@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cfcb5064-e931-4509-b835-709da2a75593" name="Changes" comment="share links" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <phar pharPath="C:\composer\composer.phar" interpreterId="83507a86-4271-4127-9170-fbd1bb82163a" />
+    </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1xJIL0vzONhessDSUak1c6qZzqu" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.saveactions" />
+    <property name="ts.external.directory.path" value="C:\Users\Riaz\AppData\Local\JetBrains\Toolbox\apps\PhpStorm\ch-0\212.5080.71\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Development\Expo\Hadith\assets\fonts" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cfcb5064-e931-4509-b835-709da2a75593" name="Changes" comment="" />
+      <created>1630066704759</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1630066704759</updated>
+      <workItem from="1630066706077" duration="4308000" />
+      <workItem from="1630115779797" duration="3917000" />
+      <workItem from="1630154025861" duration="7104000" />
+      <workItem from="1630162164837" duration="2929000" />
+      <workItem from="1630206027527" duration="414000" />
+      <workItem from="1630208463206" duration="41000" />
+      <workItem from="1630214312638" duration="7000" />
+      <workItem from="1630241748188" duration="8514000" />
+      <workItem from="1630292133117" duration="629000" />
+      <workItem from="1630328088254" duration="9371000" />
+      <workItem from="1630378455448" duration="1118000" />
+      <workItem from="1630414746867" duration="6680000" />
+      <workItem from="1630500510728" duration="5192000" />
+      <workItem from="1630551699361" duration="1140000" />
+      <workItem from="1630922357483" duration="5000" />
+      <workItem from="1632145344960" duration="502000" />
+      <workItem from="1632230342229" duration="485000" />
+      <workItem from="1632279631048" duration="207000" />
+      <workItem from="1632287571537" duration="255000" />
+      <workItem from="1632314121754" duration="5201000" />
+      <workItem from="1632319408521" duration="108000" />
+      <workItem from="1632380663656" duration="14000" />
+      <workItem from="1632399994498" duration="4145000" />
+      <workItem from="1632553516500" duration="8000" />
+    </task>
+    <task id="LOCAL-00001" summary="no msg">
+      <created>1630072808572</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1630072808572</updated>
+    </task>
+    <task id="LOCAL-00002" summary="hadith components">
+      <created>1630119718334</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1630119718334</updated>
+    </task>
+    <task id="LOCAL-00003" summary="hadith components">
+      <created>1630164578072</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1630164578072</updated>
+    </task>
+    <task id="LOCAL-00004" summary="hadith components">
+      <created>1630251188575</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1630251188575</updated>
+    </task>
+    <task id="LOCAL-00005" summary="hadith components">
+      <created>1630292751538</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1630292751538</updated>
+    </task>
+    <task id="LOCAL-00006" summary="errors in history">
+      <created>1630338428576</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1630338428576</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fixed history and hadith component">
+      <created>1630419947211</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1630419947211</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added max width">
+      <created>1630466266376</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1630466266376</updated>
+    </task>
+    <task id="LOCAL-00009" summary="try now e error asei">
+      <created>1630505671830</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1630505671830</updated>
+    </task>
+    <task id="LOCAL-00010" summary="long press to copy">
+      <created>1632145477226</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1632145477227</updated>
+    </task>
+    <task id="LOCAL-00011" summary="from history to hadith fixed">
+      <created>1632279836182</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1632279836182</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixed for web, added url parameter support, can copy all items">
+      <created>1632319172356</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1632319172356</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fixed for web, added url parameter support, can copy all items">
+      <created>1632319421835</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1632319421835</updated>
+    </task>
+    <task id="LOCAL-00014" summary="share links">
+      <created>1632403922663</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1632403922663</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="no msg" />
+    <MESSAGE value="hadith components" />
+    <MESSAGE value="errors in history" />
+    <MESSAGE value="fixed history and hadith component" />
+    <MESSAGE value="added max width" />
+    <MESSAGE value="try now e error asei" />
+    <MESSAGE value="long press to copy" />
+    <MESSAGE value="from history to hadith fixed" />
+    <MESSAGE value="fixed for web, added url parameter support, can copy all items" />
+    <MESSAGE value="share links" />
+    <option name="LAST_COMMIT_MESSAGE" value="share links" />
+  </component>
+</project>
