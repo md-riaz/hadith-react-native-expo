@@ -15,7 +15,6 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import React, { useCallback, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import RenderHtml, { defaultSystemFonts } from 'react-native-render-html';
 import Button from './Button';
 
 const BASE_WEB_URL = 'https://hadith.ml';
@@ -66,7 +65,6 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
     }
   };
 
-  const systemFonts = [...defaultSystemFonts, 'Bangla'];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -80,17 +78,14 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
           contentContainerStyle={{ maxWidth: 1100 }}>
+          
           <TouchableWithoutFeedback
             onLongPress={() =>
-              _handleLongPress('পরিচ্ছেদঃ ' + hadith.topicName)
+              _handleLongPress('পরিচ্ছেদঃ ' + (hadith.topicName))
             }>
-            <RenderHtml
-              source={{
-                html: hadith.topicName && 'পরিচ্ছেদঃ ' + hadith.topicName,
-              }}
-              tagsStyles={topicNameStyles}
-              systemFonts={systemFonts}
-            />
+            <Text style={styles.topicName}>
+              {hadith.topicName && 'পরিচ্ছেদঃ ' + (hadith.topicName)}
+            </Text>
           </TouchableWithoutFeedback>
 
           <TouchableWithoutFeedback
@@ -99,12 +94,8 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
           </TouchableWithoutFeedback>
 
           <TouchableWithoutFeedback
-            onLongPress={() => _handleLongPress(hadith.hadithBengali)}>
-            <RenderHtml
-              source={{ html: hadith.hadithBengali }}
-              tagsStyles={banglaStyles}
-              systemFonts={systemFonts}
-            />
+            onLongPress={() => _handleLongPress((hadith.hadithBengali))}>
+            <Text style={styles.bangla}>{(hadith.hadithBengali)}</Text>
           </TouchableWithoutFeedback>
 
           <TouchableWithoutFeedback
@@ -151,27 +142,6 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
   );
 }
 
-const banglaStyles = {
-  body: {
-    fontFamily: 'Bangla',
-    color: '#fff',
-    fontSize: 25,
-    lineHeight: 35,
-    marginVertical: 10,
-    textAlign: 'justify',
-  },
-};
-
-const topicNameStyles = {
-  body: {
-    fontSize: 30,
-    color: 'darksalmon',
-    fontFamily: 'Bangla',
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -198,6 +168,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     lineHeight: 60,
+  },
+  topicName: {
+    fontSize: 30,
+    color: 'darksalmon',
+    fontFamily: 'Bangla',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  bangla: {
+    fontFamily: 'Bangla',
+    color: '#fff',
+    fontSize: 25,
+    lineHeight: 35,
+    marginVertical: 10,
+    textAlign: 'justify',
   },
   english: {
     fontSize: 22,
