@@ -15,6 +15,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import React, { useCallback, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import RenderHtml, { defaultSystemFonts } from 'react-native-render-html';
 import Button from './Button';
 
 const BASE_WEB_URL = 'https://hadith.ml';
@@ -65,27 +66,33 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
     }
   };
 
+  const systemFonts = [...defaultSystemFonts, 'Bangla'];
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="light" />
-      <LinearGradient
-        style={styles.LinearGradient}
-        colors={['#00172d 0%', '#000b18 100%']}>
+    <LinearGradient
+      style={styles.LinearGradient}
+      colors={['#00172d', '#000b18']}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar style="light" />
         <Text style={styles.headerText}>প্রতি মুহুর্তে হাদিস</Text>
         <ScrollView
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
           contentContainerStyle={{ maxWidth: 1100 }}>
-          
           <TouchableWithoutFeedback
             onLongPress={() =>
-              _handleLongPress('পরিচ্ছেদঃ ' + (hadith.topicName))
+              _handleLongPress('পরিচ্ছেদঃ ' + hadith.topicName)
             }>
-            <Text style={styles.topicName}>
-              {hadith.topicName && 'পরিচ্ছেদঃ ' + (hadith.topicName)}
-            </Text>
+            <View>
+              <RenderHtml
+                source={{
+                  html: hadith.topicName && 'পরিচ্ছেদঃ ' + hadith.topicName,
+                }}
+                tagsStyles={topicNameStyles}
+                systemFonts={systemFonts}
+              />
+            </View>
           </TouchableWithoutFeedback>
 
           <TouchableWithoutFeedback
@@ -94,8 +101,14 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
           </TouchableWithoutFeedback>
 
           <TouchableWithoutFeedback
-            onLongPress={() => _handleLongPress((hadith.hadithBengali))}>
-            <Text style={styles.bangla}>{(hadith.hadithBengali)}</Text>
+            onLongPress={() => _handleLongPress(hadith.hadithBengali)}>
+            <View>
+              <RenderHtml
+                source={{ html: hadith.hadithBengali }}
+                tagsStyles={banglaStyles}
+                systemFonts={systemFonts}
+              />
+            </View>
           </TouchableWithoutFeedback>
 
           <TouchableWithoutFeedback
@@ -105,11 +118,23 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
 
           <TouchableWithoutFeedback
             onLongPress={() => _handleLongPress('বইঃ ' + hadith.book)}>
-            <Text style={styles.book}>{'বইঃ ' + hadith.book}</Text>
+            <View>
+              <RenderHtml
+                source={{ html: 'বইঃ ' + hadith.book }}
+                tagsStyles={bookStyles}
+                systemFonts={systemFonts}
+              />
+            </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
             onLongPress={() => _handleLongPress('অধ্যায়ঃ ' + hadith.chapter)}>
-            <Text style={styles.chapter}>{'অধ্যায়ঃ ' + hadith.chapter}</Text>
+            <View>
+              <RenderHtml
+                source={{ html: 'অধ্যায়ঃ ' + hadith.chapter }}
+                tagsStyles={chapterStyles}
+                systemFonts={systemFonts}
+              />
+            </View>
           </TouchableWithoutFeedback>
 
           <View
@@ -137,17 +162,57 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
             )}
           </View>
         </ScrollView>
-      </LinearGradient>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
+
+const banglaStyles = {
+  body: {
+    fontFamily: 'Bangla',
+    color: '#fff',
+    fontSize: 25,
+    lineHeight: 35,
+    marginVertical: 10,
+    textAlign: 'justify',
+  },
+};
+
+const topicNameStyles = {
+  body: {
+    fontSize: 30,
+    color: 'darksalmon',
+    fontFamily: 'Bangla',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+};
+
+const bookStyles = {
+  body: {
+    color: '#28a745',
+    textAlign: 'center',
+    fontSize: 25,
+    fontFamily: 'Bangla',
+    marginVertical: 3,
+  },
+};
+
+const chapterStyles = {
+  body: {
+    color: '#28a745',
+    textAlign: 'center',
+    fontSize: 25,
+    fontFamily: 'Bangla',
+    marginVertical: 3,
+  },
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#00172d',
   },
   LinearGradient: {
     flex: 1,
@@ -169,21 +234,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 60,
   },
-  topicName: {
-    fontSize: 30,
-    color: 'darksalmon',
-    fontFamily: 'Bangla',
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-  bangla: {
-    fontFamily: 'Bangla',
-    color: '#fff',
-    fontSize: 25,
-    lineHeight: 35,
-    marginVertical: 10,
-    textAlign: 'justify',
-  },
   english: {
     fontSize: 22,
     color: 'darkgray',
@@ -193,19 +243,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
     marginVertical: 20,
-  },
-  book: {
-    color: '#28a745',
-    textAlign: 'center',
-    fontSize: 25,
-    fontFamily: 'Bangla',
-    marginVertical: 3,
-  },
-  chapter: {
-    color: '#28a745',
-    textAlign: 'center',
-    fontSize: 25,
-    fontFamily: 'Bangla',
-    marginVertical: 3,
   },
 });

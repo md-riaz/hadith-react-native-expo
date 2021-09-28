@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useFonts } from 'expo-font';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Linking from 'expo-linking';
+import { Image, Platform, StyleSheet, TouchableOpacity } from 'react-native';
+import NetInfo from '@react-native-community/netinfo';
 import Loader from './components/Loader';
 import TryAgain from './components/TryAgain';
 import AppLoading from 'expo-app-loading';
 import Hadith from './components/Hadith';
 import Histories from './components/Histories';
-import * as Linking from 'expo-linking';
-import { Image, Platform, StyleSheet, TouchableOpacity } from 'react-native';
 import refreshIcon from './assets/img/refresh.svg';
 
 const BASE_HADITH_URL = 'https://alquranbd.com/api';
@@ -194,8 +195,7 @@ export default function App() {
         .sort((a, b) => b[0] - a[0])
         .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
 
-        return sortedHistories;
-        
+      return sortedHistories;
     } catch (e) {
       setError(true);
       alert(e);
@@ -215,6 +215,13 @@ export default function App() {
 
   useEffect(() => {
     let isMounted = true;
+
+    NetInfo.fetch().then(
+      (state) =>
+        !state.isConnected &&
+        setError(true) &&
+        alert('Network connection unavailable.')
+    );
 
     if (Platform.OS === 'web') {
       Linking.getInitialURL().then((url) => {
