@@ -1,5 +1,5 @@
 import {
-  AlertIOS,
+  Alert,
   Clipboard,
   Platform,
   RefreshControl,
@@ -15,7 +15,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import React, { useCallback, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import parse from 'html-react-parser';
+import RenderHtml, { defaultSystemFonts } from 'react-native-render-html';
 import Button from './Button';
 
 const BASE_WEB_URL = 'https://hadith.ml';
@@ -37,7 +37,7 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
     if (Platform.OS === 'android') {
       ToastAndroid.show(msg, ToastAndroid.SHORT);
     } else if (Platform.OS === 'ios') {
-      AlertIOS.alert(msg);
+      Alert.alert(msg);
     } else {
       alert(msg);
     }
@@ -66,6 +66,8 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
     }
   };
 
+  const systemFonts = [...defaultSystemFonts, 'Bangla'];
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
@@ -80,11 +82,15 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
           contentContainerStyle={{ maxWidth: 1100 }}>
           <TouchableWithoutFeedback
             onLongPress={() =>
-              _handleLongPress('পরিচ্ছেদঃ ' + parse(hadith.topicName))
+              _handleLongPress('পরিচ্ছেদঃ ' + hadith.topicName)
             }>
-            <Text style={styles.topicName}>
-              {hadith.topicName && 'পরিচ্ছেদঃ ' + parse(hadith.topicName)}
-            </Text>
+            <RenderHtml
+              source={{
+                html: hadith.topicName && 'পরিচ্ছেদঃ ' + hadith.topicName,
+              }}
+              tagsStyles={topicNameStyles}
+              systemFonts={systemFonts}
+            />
           </TouchableWithoutFeedback>
 
           <TouchableWithoutFeedback
@@ -93,8 +99,12 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
           </TouchableWithoutFeedback>
 
           <TouchableWithoutFeedback
-            onLongPress={() => _handleLongPress(parse(hadith.hadithBengali))}>
-            <Text style={styles.bangla}>{parse(hadith.hadithBengali)}</Text>
+            onLongPress={() => _handleLongPress(hadith.hadithBengali)}>
+            <RenderHtml
+              source={{ html: hadith.hadithBengali }}
+              tagsStyles={banglaStyles}
+              systemFonts={systemFonts}
+            />
           </TouchableWithoutFeedback>
 
           <TouchableWithoutFeedback
@@ -141,6 +151,27 @@ export default function Hadith({ hadith, RefreshHadith, showHistory }) {
   );
 }
 
+const banglaStyles = {
+  body: {
+    fontFamily: 'Bangla',
+    color: '#fff',
+    fontSize: 25,
+    lineHeight: 35,
+    marginVertical: 10,
+    textAlign: 'justify',
+  },
+};
+
+const topicNameStyles = {
+  body: {
+    fontSize: 30,
+    color: 'darksalmon',
+    fontFamily: 'Bangla',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -167,21 +198,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     lineHeight: 60,
-  },
-  topicName: {
-    fontSize: 30,
-    color: 'darksalmon',
-    fontFamily: 'Bangla',
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-  bangla: {
-    fontFamily: 'Bangla',
-    color: '#fff',
-    fontSize: 25,
-    lineHeight: 35,
-    marginVertical: 10,
-    textAlign: 'justify',
   },
   english: {
     fontSize: 22,
