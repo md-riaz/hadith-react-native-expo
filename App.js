@@ -115,7 +115,7 @@ export default function App() {
         }
 
         console.log('refresh done');
-    }, [getHadiths()]);
+    }, [getHadiths]);
 
     // on history btn click
     const showHistory = function () {

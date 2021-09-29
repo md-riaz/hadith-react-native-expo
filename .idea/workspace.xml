@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cfcb5064-e931-4509-b835-709da2a75593" name="Changes" comment="fixed issue" />
+    <list default="true" id="cfcb5064-e931-4509-b835-709da2a75593" name="Changes" comment="fixed issue">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Hadith.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Hadith.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +36,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="settings.saveactions" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="C:\Users\Riaz\AppData\Local\JetBrains\Toolbox\apps\PhpStorm\ch-0\212.5284.49\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -40,7 +45,7 @@
       <recent name="D:\Development\Expo\Hadith\assets\fonts" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.android">
     <configuration name="android" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -100,7 +105,10 @@
       <workItem from="1632380663656" duration="14000" />
       <workItem from="1632399994498" duration="4145000" />
       <workItem from="1632553516500" duration="8000" />
-      <workItem from="1632918996960" duration="4117000" />
+      <workItem from="1632918996960" duration="5663000" />
+      <workItem from="1632925714546" duration="223000" />
+      <workItem from="1632926027181" duration="18000" />
+      <workItem from="1632926204316" duration="17000" />
     </task>
     <task id="LOCAL-00001" summary="no msg">
       <created>1630072808572</created>
@@ -207,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632922936548</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fixed issue">
+      <created>1632923574638</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1632923574638</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

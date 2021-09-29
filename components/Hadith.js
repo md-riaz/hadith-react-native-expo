@@ -18,6 +18,7 @@ import React, {useCallback, useState} from 'react';
 import {LinearGradient} from 'expo-linear-gradient';
 import RenderHtml, {defaultSystemFonts} from 'react-native-render-html';
 import Button from './Button';
+import he from 'he'
 
 const BASE_WEB_URL = 'https://hadith.ml';
 
@@ -46,7 +47,9 @@ export default function Hadith({hadith, RefreshHadith, showHistory}) {
 
     const _handleLongPress = (textContent) => {
         if (Platform.OS !== 'web') {
-            Clipboard.setString(textContent);
+            let data = textContent.replace(/<[^>]+>/g, '');
+            data = he.decode(data);
+            Clipboard.setString(data);
             notifyMessage('Copied!');
         }
     };
