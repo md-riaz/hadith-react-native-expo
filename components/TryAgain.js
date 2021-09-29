@@ -15,7 +15,7 @@ export default function TryAgain({ RefreshHadith }) {
   const onRefresh = useCallback(() => {
     setRefreshing(true);
 
-    RefreshHadith().then(() => setRefreshing(false));
+    RefreshHadith().then(() => setRefreshing(false)).catch(e => alert(e));
   }, [RefreshHadith]);
 
   return (
