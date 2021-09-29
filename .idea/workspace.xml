@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cfcb5064-e931-4509-b835-709da2a75593" name="Changes" comment="share links">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Hadith.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Hadith.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Histories.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Histories.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/TryAgain.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/TryAgain.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="cfcb5064-e931-4509-b835-709da2a75593" name="Changes" comment="fixed issue" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,7 +32,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.saveactions" />
-    <property name="ts.external.directory.path" value="C:\Users\Riaz\AppData\Local\JetBrains\Toolbox\apps\PhpStorm\ch-0\212.5080.71\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="C:\Users\Riaz\AppData\Local\JetBrains\Toolbox\apps\PhpStorm\ch-0\212.5284.49\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -108,7 +100,7 @@
       <workItem from="1632380663656" duration="14000" />
       <workItem from="1632399994498" duration="4145000" />
       <workItem from="1632553516500" duration="8000" />
-      <workItem from="1632918996960" duration="2842000" />
+      <workItem from="1632918996960" duration="4117000" />
     </task>
     <task id="LOCAL-00001" summary="no msg">
       <created>1630072808572</created>
@@ -208,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632403922663</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="fixed issue">
+      <created>1632922936548</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1632922936548</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,6 +237,7 @@
     <MESSAGE value="from history to hadith fixed" />
     <MESSAGE value="fixed for web, added url parameter support, can copy all items" />
     <MESSAGE value="share links" />
-    <option name="LAST_COMMIT_MESSAGE" value="share links" />
+    <MESSAGE value="fixed issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed issue" />
   </component>
 </project>
