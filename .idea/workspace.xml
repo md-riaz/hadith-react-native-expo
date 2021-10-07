@@ -107,7 +107,7 @@
       <workItem from="1632926027181" duration="18000" />
       <workItem from="1632926204316" duration="17000" />
       <workItem from="1632993186599" duration="3000" />
-      <workItem from="1633607741745" duration="796000" />
+      <workItem from="1633607741745" duration="1207000" />
     </task>
     <task id="LOCAL-00001" summary="no msg">
       <created>1630072808572</created>
@@ -249,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633608697178</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fixing line height problem and user-select property">
+      <created>1633608793576</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1633608793576</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

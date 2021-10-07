@@ -96,6 +96,7 @@ export default function Hadith({hadith, RefreshHadith, showHistory}) {
                                 tagsStyles={topicNameStyles}
                                 systemFonts={systemFonts}
                                 contentWidth={width}
+                                defaultTextProps={{selectable: true, editable: false, multiline: true}}
                             />
                         </View>
                     </TouchableWithoutFeedback>
@@ -113,6 +114,7 @@ export default function Hadith({hadith, RefreshHadith, showHistory}) {
                                 tagsStyles={banglaStyles}
                                 systemFonts={systemFonts}
                                 contentWidth={width}
+                                defaultTextProps={{selectable: true, editable: false, multiline: true}}
                             />
                         </View>
                     </TouchableWithoutFeedback>
@@ -130,6 +132,7 @@ export default function Hadith({hadith, RefreshHadith, showHistory}) {
                                 tagsStyles={bookStyles}
                                 systemFonts={systemFonts}
                                 contentWidth={width}
+                                defaultTextProps={{selectable: true, editable: false, multiline: true}}
                             />
                         </View>
                     </TouchableWithoutFeedback>
@@ -141,6 +144,7 @@ export default function Hadith({hadith, RefreshHadith, showHistory}) {
                                 tagsStyles={chapterStyles}
                                 systemFonts={systemFonts}
                                 contentWidth={width}
+                                defaultTextProps={{selectable: true, editable: false, multiline: true}}
                             />
                         </View>
                     </TouchableWithoutFeedback>
@@ -192,8 +196,7 @@ const topicNameStyles = {
         color: 'darksalmon',
         fontFamily: 'Bangla',
         marginBottom: 10,
-        textAlign: 'center',
-        userSelect: 'auto'
+        textAlign: 'center'
     },
 };
 
