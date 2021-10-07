@@ -193,6 +193,7 @@ const topicNameStyles = {
         fontFamily: 'Bangla',
         marginBottom: 10,
         textAlign: 'center',
+        userSelect: 'auto'
     },
 };
 
