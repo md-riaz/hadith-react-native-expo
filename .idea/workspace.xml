@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cfcb5064-e931-4509-b835-709da2a75593" name="Changes" comment="fixed issue">
+    <list default="true" id="cfcb5064-e931-4509-b835-709da2a75593" name="Changes" comment="added he module">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Hadith.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Hadith.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +106,7 @@
       <workItem from="1632925714546" duration="223000" />
       <workItem from="1632926027181" duration="18000" />
       <workItem from="1632926204316" duration="17000" />
+      <workItem from="1632993186599" duration="3000" />
     </task>
     <task id="LOCAL-00001" summary="no msg">
       <created>1630072808572</created>
@@ -222,7 +220,21 @@
       <option name="project" value="LOCAL" />
       <updated>1632923574638</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="added he module">
+      <created>1632926352505</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1632926352505</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added he module">
+      <created>1632926495521</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1632926495521</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,6 +265,7 @@
     <MESSAGE value="fixed for web, added url parameter support, can copy all items" />
     <MESSAGE value="share links" />
     <MESSAGE value="fixed issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed issue" />
+    <MESSAGE value="added he module" />
+    <option name="LAST_COMMIT_MESSAGE" value="added he module" />
   </component>
 </project>
