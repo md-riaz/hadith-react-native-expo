@@ -180,7 +180,7 @@ const banglaStyles = {
         fontFamily: 'Bangla',
         color: '#fff',
         fontSize: 25,
-        lineHeight: 35,
+        lineHeight: 45,
         marginVertical: 10,
         textAlign: 'justify',
     },
@@ -193,6 +193,7 @@ const topicNameStyles = {
         fontFamily: 'Bangla',
         marginBottom: 10,
         textAlign: 'center',
+        userSelect: auto
     },
 };
 
